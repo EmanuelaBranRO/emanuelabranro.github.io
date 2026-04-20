@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bran Emanuela | Meditații Informatică Online</title>
+  <meta
+    name="description"
+    content="Meditații online la informatică pentru elevi din clasele V-XII. Începem de la 0, urmând programa SEPI, cu posibilitatea de a ajunge la nivel de olimpiadă sau la o bază solidă pentru BAC."
+  />
+  <style>
+    :root {
+      --bg: #f7fbff;
+      --bg-soft: #eef6ff;
+      --card: rgba(255, 255, 255, 0.9);
+      --card-strong: #ffffff;
+      --text: #142133;
+      --muted: #4f5f75;
+      --accent1: #34d399;
+      --accent2: #38bdf8;
+      --accent3: #8b5cf6;
+      --border: rgba(20, 33, 51, 0.08);
+      --shadow: 0 16px 38px rgba(31, 61, 99, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.10), transparent 25%),
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.08), transparent 25%),
+        linear-gradient(180deg, #f9fcff 0%, #f2f8ff 50%, #eef6ff 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--accent2), var(--accent1), var(--accent3));
+      box-shadow: 0 10px 22px rgba(56, 189, 248, 0.18);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      color: white;
+      font-weight: 800;
+      background: linear-gradient(135deg, #19b0f2, #2ac7a0);
+      box-shadow: 0 12px 24px rgba(52, 211, 153, 0.18);
+    }
+
+    .hero {
+      padding: 84px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      color: #30506f;
+      font-weight: 700;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.6rem);
+      line-height: 1.06;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+      color: #102033;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #19b0f2 0%, #2ac7a0 45%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.12rem;
+      max-width: 720px;
+      margin-bottom: 26px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badges span {
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--border);
+      color: #1b3550;
+      font-weight: 700;
+      font-size: 0.96rem;
+      box-shadow: 0 8px 18px rgba(31, 61, 99, 0.06);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 24px;
+      border-radius: 16px;
+      font-weight: 800;
+      transition: 0.22s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent2), var(--accent1));
+      box-shadow: 0 16px 28px rgba(56, 189, 248, 0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f8fbff;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .code-box {
+      font-family: Consolas, Monaco, monospace;
+      background: #f4f9ff;
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      border-radius: 18px;
+      padding: 18px;
+      color: #18314c;
+      margin-bottom: 18px;
+      overflow-x: auto;
+    }
+
+    .code-line .key { color: #0284c7; }
+    .code-line .val { color: #059669; }
+    .code-line .acc { color: #7c3aed; }
+
+    .hero-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+      color: #102033;
+    }
+
+    .hero-card ul {
+      list-style: none;
+    }
+
+    .hero-card li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      color: var(--muted);
+    }
+
+    .hero-card li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent1);
+      font-weight: 900;
+    }
+
+    .mini-note {
+      margin-top: 14px;
+      color: #5d7088;
+      font-size: 0.97rem;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-head {
+      margin-bottom: 42px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 12px;
+      color: #102033;
+    }
+
+    .section-head p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover {
+      background: var(--card-strong);
+      transform: translateY(-2px);
+      transition: 0.2s ease;
+    }
+
+    .card-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      font-weight: 900;
+      background: linear-gradient(135deg, rgba(52,211,153,0.14), rgba(56,189,248,0.16), rgba(139,92,246,0.14));
+      border: 1px solid rgba(56, 189, 248, 0.14);
+      color: #18314c;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #102033;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .about-box {
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .about-highlight {
+      background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(52,211,153,0.08), rgba(139,92,246,0.07));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-highlight h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+      color: #102033;
+    }
+
+    .about-highlight p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .highlight-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .highlight-list li {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--border);
+      color: #1e3954;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid var(--border);
+    }
+
+    .timeline-item strong {
+      display: block;
+      color: #102033;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item span {
+      color: var(--muted);
+    }
+
+    .path-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .path {
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, #ffffff 0%, #f9fcff 100%);
+    }
+
+    .path h3 {
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      color: #102033;
+    }
+
+    .path p, .path li {
+      color: var(--muted);
+    }
+
+    .path ul {
+      margin-top: 14px;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .price-banner {
+      text-align: center;
+      padding: 30px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.10), rgba(52,211,153,0.10), rgba(139,92,246,0.08));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .price-banner h3 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      color: #102033;
+    }
+
+    .price-banner p {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 46px 26px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at top left, rgba(52,211,153,0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(139,92,246,0.08), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 12px;
+      color: #102033;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 24px;
+      font-size: 1.06rem;
+    }
+
+    .contact-box {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 34px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .contact-box strong {
+      color: #102033;
+    }
+
+    footer {
+      padding: 30px 0 40px;
+      text-align: center;
+      color: #6c7f96;
+      font-size: 0.96rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about-box,
+      .grid-3,
+      .grid-2,
+      .path-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        justify-content: center;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+
+      .nav-cta {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge">&lt;/&gt;</div>
+        <div>Bran Emanuela · Meditații Informatică</div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#despre">Despre</a>
+        <a href="#parcurs">Parcurs</a>
+        <a href="#cum-lucram">Cum lucrăm</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="https://wa.me/40724021149" target="_blank">Prima lecție gratis</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">💻 Online · Clasele V–XII · De la 0 până la performanță</div>
+
+        <h1>
+          Începi de la <span class="gradient-text">ZERO</span>.
+          Poți ajunge până la <span class="gradient-text">olimpiadă</span> sau la o bază solidă pentru <span class="gradient-text">BAC</span>.
+        </h1>
+
+        <p>
+          Sunt <strong>Bran Emanuela</strong> și ofer <strong>pregătire online la informatică</strong>
+          pentru elevi care vor să pornească de la început, clar și fără stres.
+          Lucrez după <strong>programa SEPI de olimpiadă</strong>, iar în funcție de dorința elevului,
+          drumul poate merge de la primele noțiuni de logică și programare până la
+          <strong>nivel de olimpiadă</strong> sau la <strong>punerea bazelor din timp pentru BAC</strong>.
+        </p>
+
+        <div class="hero-badges">
+          <span>Prima lecție gratuită</span>
+          <span>Doar online</span>
+          <span>Pentru începători</span>
+          <span>Ritm adaptat elevului</span>
+        </div>
+
+        <div class="btn-group">
+          <a class="btn btn-primary" href="https://wa.me/40700000000" target="_blank">
+            Programează prima lecție gratis
+          </a>
+          <a class="btn btn-secondary" href="#parcurs">
+            Vezi cum evoluează pregătirea
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="code-box">
+          <div class="code-line"><span class="key">nume</span> = <span class="val">"Bran Emanuela"</span></div>
+          <div class="code-line"><span class="key">format</span> = <span class="val">"online"</span></div>
+          <div class="code-line"><span class="key">incepem</span> = <span class="acc">"de la 0"</span></div>
+          <div class="code-line"><span class="key">urmarim</span> = <span class="val">"programa SEPI"</span></div>
+          <div class="code-line"><span class="key">poate_ajunge</span> = <span class="acc">"BAC / olimpiadă"</span></div>
+          <div class="code-line"><span class="key">prima_lectie</span> = <span class="val">"gratuită"</span></div>
+        </div>
+
+        <h3>Ce obține elevul?</h3>
+        <ul>
+          <li>Înțelege informatica pas cu pas, chiar dacă pornește de la zero</li>
+          <li>Construiește baze reale, nu doar învață mecanic</li>
+          <li>Are un traseu clar: început → progres → BAC sau olimpiadă</li>
+          <li>Primește pregătire adaptată nivelului și obiectivului său</li>
+        </ul>
+
+        <p class="mini-note">
+          Prima întâlnire este gratuită, ca să văd de unde începem pregătirea și care este direcția potrivită.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="despre">
+    <div class="container">
+      <div class="section-head" style="display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap;">
+
+		<div style="flex:1; min-width:260px;">
+			<h2>Despre pregătirea mea</h2>
+			<p>
+			  Am o pregătire solidă în informatică — licență, master și doctorat în Știința Calculatoarelor — și experiență cu elevi de niveluri diferite, de la primii pași în programare până la pregătire avansată.
+			</p>
+		  </div>
+
+		  <div style="flex:0 0 auto;">
+			<img src="ema1.png" alt="Bran Emanuela" style="width:140px; border-radius:16px; object-fit:cover;">
+		  </div>
+
+		</div>
+	  
+	  
+
+      <div class="about-box">
+        <div class="about-highlight">
+          <h3>De la „nu știu nimic” la „încep să înțeleg cu adevărat”</h3>
+          <p>
+            Mulți elevi se blochează fiindcă informatica le pare prea abstractă sau prea rapidă.
+            Tocmai de aceea, lucrăm într-un mod structurat, astfel încât fiecare noțiune
+            nouă să aibă sens și să se așeze corect.
+          </p>
+          <p>
+            Nu mă adresez doar celor care sunt deja buni, ci mai ales celor care au nevoie
+            de un început clar. În funcție de ritm și de obiectiv, pregătirea poate continua
+            spre performanță sau spre consolidarea unei baze excelente pentru BAC.
+          </p>
+
+          <ul class="highlight-list">
+            <li>✔ Începem de la nivelul real al elevului</li>
+            <li>✔ Urmăm programa SEPI de olimpiadă</li>
+            <li>✔ Putem construi din timp baza pentru BAC</li>
+            <li>✔ Totul se desfășoară exclusiv online</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">{ }</div>
+          <h3>Ce urmăresc la fiecare elev</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>1. Claritate</strong>
+              <span>Să înțeleagă ideile, nu doar să memoreze pași.</span>
+            </div>
+            <div class="timeline-item">
+              <strong>2. Încredere</strong>
+              <span>Să nu mai perceapă informatica drept ceva „prea greu”.</span>
+            </div>
+            <div class="timeline-item">
+              <strong>3. Direcție</strong>
+              <span>Să știe încotro merge: școală, BAC, performanță.</span>
+            </div>
+            <div class="timeline-item">
+              <strong>4. Progres real</strong>
+              <span>Să construiască o bază solidă pe care poate continua.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="parcurs">
+    <div class="container">
+      <div class="section-head">
+        <h2>Parcursul de pregătire</h2>
+        <p>
+          Plecăm de la nivelul elevului și stabilim direcția potrivită:
+          bazele informaticii, traseu spre olimpiadă sau fundament bun pentru BAC.
+        </p>
+      </div>
+
+      <div class="path-cards">
+        <div class="path">
+          <h3>Start de la 0</h3>
+          <p>
+            Pentru elevii care abia încep și au nevoie de explicații clare, pe înțelesul lor.
+          </p>
+          <ul>
+            <li>logică de bază</li>
+            <li>primele noțiuni de programare</li>
+            <li>înțelegerea pașilor unui algoritm</li>
+            <li>încredere în lucrul cu probleme</li>
+          </ul>
+        </div>
+
+        <div class="path">
+          <h3>Drum spre olimpiadă</h3>
+          <p>
+            Pentru elevii care vor să evolueze mai departe, folosind ca reper programa SEPI.
+          </p>
+          <ul>
+            <li>construcție serioasă a bazei</li>
+            <li>gândire algoritmică</li>
+            <li>exerciții progresive</li>
+            <li>pregătire orientată spre performanță</li>
+          </ul>
+        </div>
+
+        <div class="path">
+          <h3>Bază din timp pentru BAC</h3>
+          <p>
+            Pentru elevii care vor să aibă liniște mai târziu și să construiască din vreme.
+          </p>
+          <ul>
+            <li>noțiuni bine fixate</li>
+            <li>înțelegere, nu învățare mecanică</li>
+            <li>ritm constant și organizat</li>
+            <li>temelie bună pentru anii următori</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">&lt;/&gt;</div>
+          <h3>Pentru cine este potrivit</h3>
+          <p>
+            Pentru elevii din clasele V–XII care vor să înceapă bine,
+            să recupereze, să înțeleagă mai clar sau să se dezvolte spre un nivel mai înalt.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">01</div>
+          <h3>Ce facem concret</h3>
+          <p>
+            Clarificăm nivelul actual, identificăm lacunele și construim un plan de lucru
+            potrivit elevului și obiectivului său.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Ce NU facem</h3>
+          <p>
+            Nu ne grăbim fără bază, nu învățăm mecanic și nu încărcăm elevul inutil.
+            Mai întâi înțelegem, apoi avansăm.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cum-lucram">
+    <div class="container">
+      <div class="section-head">
+        <h2>Cum lucrăm</h2>
+        <p>
+          Proces simplu, clar și eficient, pentru ca pregătirea să înceapă corect.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">1</div>
+          <h3>Prima lecție este gratuită</h3>
+          <p>
+            Prima întâlnire are rol de orientare. Văd de unde pornește elevul,
+            ce știe deja, unde sunt dificultățile și ce direcție este potrivită pentru el.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">2</div>
+          <h3>Pregătirea este doar online</h3>
+          <p>
+            Toate ședințele se desfășoară exclusiv online. Astfel, lucrăm comod,
+            organizat și flexibil, fără deplasare.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">3</div>
+          <h3>Plan personalizat</h3>
+          <p>
+            După prima lecție, stabilim nivelul și traseul: început de la zero,
+            dezvoltare în direcția olimpiadei sau consolidare pentru BAC.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">4</div>
+          <h3>Progres pas cu pas</h3>
+          <p>
+            Fiecare etapă este construită logic, astfel încât elevul să avanseze
+            sigur și să simtă că poate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="price-banner">
+        <h3>Prima lecție gratuită</h3>
+        <p>
+          O folosim pentru a înțelege nivelul elevului, pentru a vedea de unde începem
+          pregătirea și pentru a stabili dacă direcția potrivită este: bază de la 0,
+          traseu spre olimpiadă sau construcție pentru BAC.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta-box">
+        <h2>Nu știi informatică? Perfect. De aici începem.</h2>
+        <p>
+          Dacă vrei o pregătire clară, serioasă și accesibilă, începută de la nivelul real al elevului,
+          scrie-mi. Prima lecție este gratuită, iar pregătirea se desfășoară exclusiv online.
+        </p>
+        <div class="btn-group" style="justify-content:center;">
+          <a class="btn btn-primary" href="https://wa.me/40700000000" target="_blank">
+            Scrie-mi pe WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="#contact">
+            Vezi datele de contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>
+          Pentru programări sau întrebări, mă poți contacta direct.
+        </p>
+      </div>
+
+      <div class="contact-box">
+        <p><strong>Nume:</strong> Bran Emanuela</p>
+        <p><strong>Format:</strong> pregătire exclusiv online</p>
+        <p><strong>Prima lecție:</strong> gratuită</p>
+        <p><strong>WhatsApp / Telefon:</strong> 0724 021 149</p>
+        <p><strong>Email:</strong> bran.emanuela2019@gmail.com</p>
+
+        <div class="btn-group" style="justify-content:center; margin-top: 20px;">
+          <a class="btn btn-primary" href="https://wa.me/40724021149" target="_blank">
+            WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="mailto:bran.emanuela2019@gmail.com">
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Bran Emanuela · Meditații Informatică Online
+    </div>
+  </footer>
+</body>
+</html>
